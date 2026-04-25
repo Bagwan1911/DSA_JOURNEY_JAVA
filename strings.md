@@ -1,8 +1,3 @@
-Lo bhai, yeh raha tera **Day 2 — Strings** Java wala notes! 🔥
-
----
-
-```markdown
 # 📚 DSA Notes — Strings
 
 > **Date:** 25 April 2026  
