@@ -1,0 +1,126 @@
+# 📚 DSA Notes — Trees (Beginner)
+
+> **Date:** 25 May 2026  
+> **Topic:** Trees — Beginner Level
+
+---
+
+## 🔷 Binary Search Tree (BST) kya hota hai?
+
+BST ek special binary tree hai jisme:
+- **Left child** hamesha **parent se chota** hota hai
+- **Right child** hamesha **parent se bada** hota hai
+
+```
+        50
+       /  \
+      30   70
+     / \   / \
+    20  40 60  80
+```
+
+---
+
+## 🔷 BST — Insert
+
+```java
+Node insert(Node root, int data) {
+    if (root == null) return new Node(data);
+
+    if (data < root.data)
+        root.left = insert(root.left, data);
+    else if (data > root.data)
+        root.right = insert(root.right, data);
+
+    return root;
+}
+```
+
+---
+
+## 🔷 BST — Search
+
+```java
+boolean search(Node root, int key) {
+    if (root == null) return false;
+    if (root.data == key) return true;
+
+    if (key < root.data)
+        return search(root.left, key);
+    else
+        return search(root.right, key);
+}
+```
+
+---
+
+## 🔷 BST — Delete
+
+```java
+Node delete(Node root, int key) {
+    if (root == null) return null;
+
+    if (key < root.data)
+        root.left = delete(root.left, key);
+    else if (key > root.data)
+        root.right = delete(root.right, key);
+    else {
+        // Case 1: No child
+        if (root.left == null && root.right == null) return null;
+        // Case 2: One child
+        if (root.left == null) return root.right;
+        if (root.right == null) return root.left;
+        // Case 3: Two children — inorder successor lao
+        Node temp = root.right;
+        while (temp.left != null) temp = temp.left;
+        root.data = temp.data;
+        root.right = delete(root.right, temp.data);
+    }
+    return root;
+}
+```
+
+---
+
+## 🔷 BST Inorder = Sorted Output!
+
+```java
+// BST ka inorder traversal hamesha sorted order mein deta hai
+inorder(root);
+// Output: 20 30 40 50 60 70 80
+```
+
+---
+
+## 🔷 Time Complexity (BST)
+
+| Operation | Average  | Worst |
+|-----------|----------|-------|
+| Search    | O(log n) | O(n)  |
+| Insert    | O(log n) | O(n)  |
+| Delete    | O(log n) | O(n)  |
+
+> ⚠️ Worst case O(n) tab hota hai jab tree skewed ho (ek side mein sab nodes)
+
+---
+
+## 🔷 Practice Problems (LeetCode)
+
+| #  | Problem                                  | Difficulty |
+|----|------------------------------------------|------------|
+| 1  | Search in a Binary Search Tree           | Easy       |
+| 2  | Insert into a Binary Search Tree         | Medium     |
+| 3  | Delete Node in a BST                     | Medium     |
+| 4  | Validate Binary Search Tree              | Medium     |
+| 5  | Lowest Common Ancestor of BST            | Medium     |
+
+---
+
+## ✅ Aaj ka Summary
+
+- BST mein left < root < right hamesha
+- Inorder traversal se **sorted array** milta hai
+- Insert, Search, Delete — sab recursion se hota hai
+- LeetCode pe **Search in BST** se shuru karo
+
+---
